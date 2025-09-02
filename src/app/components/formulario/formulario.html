@@ -37,7 +37,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('acudienteDos'), 'field-valid': isControlValid('acudienteDos')}">
-      <mat-label>Acudiente Dos</mat-label>
+      <mat-label>Acudiente Dos (opcional)</mat-label>
       <input matInput [ngModel]="acudienteDos()" (ngModelChange)="acudienteDos.set($event)" name="acudienteDos">
     </mat-form-field>
 
