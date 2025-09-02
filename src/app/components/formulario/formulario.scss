@@ -1,0 +1,54 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--texto-botones); // Changed color to institutional green
+}
+
+.validation-message {
+  color: var(--bordes); // Institutional red
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+form {
+  width: 80%;
+  max-width: 800px; // Increased max-width to accommodate two columns
+  display: grid;
+  grid-template-columns: 1fr; // Default to one column for mobile
+  gap: 10px; // Gap between fields
+
+  @media (min-width: 600px) { // For screens wider than 600px (tablets and desktops)
+    grid-template-columns: 1fr 1fr; // Two columns
+  }
+}
+
+/* Ensure form fields take full width within their grid cell */
+mat-form-field {
+  width: 100%;
+}
+
+/* Make specific fields span two columns if needed, e.g., the submit button */
+button[mat-raised-button] {
+  font-size: 1.2rem;
+  grid-column: 1 / -1; // Make button span all columns
+  color: var(--texto-botones); // Changed text color to institutional green
+}
+
+// Styling for valid/invalid fields
+::ng-deep .mat-form-field.field-invalid .mat-form-field-outline {
+  border-color: var(--bordes) !important; // Institutional red
+}
+
+::ng-deep .mat-form-field.field-valid .mat-form-field-outline {
+  border-color: var(--texto-botones) !important; // Institutional green
+}

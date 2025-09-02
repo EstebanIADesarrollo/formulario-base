@@ -1,1 +1,119 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+:root {
+  --texto-botones: #219238;
+  --bordes: #F00302;
+  --fondo-uno: 38, 8, 28; // RGB values
+  --fondo-dos: #FEFFFF;
+
+  // Variables específicas para Angular Material
+  --mdc-filled-text-field-container-color: rgba(var(--fondo-uno), 0.8); // Changed opacity
+  --mdc-filled-text-field-label-text-color: var(--fondo-dos);
+  --mdc-filled-text-field-input-text-color: var(--fondo-dos);
+  --mdc-filled-text-field-active-indicator-color: var(--bordes);
+  --mdc-filled-text-field-hover-active-indicator-color: var(--bordes);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--bordes);
+
+  // Para outlined appearance (si lo usas)
+  --mdc-outlined-text-field-container-color: rgba(var(--fondo-uno), 0.8); // Changed opacity
+  --mdc-outlined-text-field-label-text-color: var(--fondo-dos);
+  --mdc-outlined-text-field-input-text-color: var(--fondo-dos);
+  --mdc-outlined-text-field-outline-color: var(--bordes);
+  --mdc-outlined-text-field-hover-outline-color: var(--bordes);
+  --mdc-outlined-text-field-focus-outline-color: var(--bordes);
+}
+
+// Estilos globales para mat-form-field
+.mat-mdc-form-field {
+  // Background del campo
+  .mat-mdc-text-field-wrapper {
+    background-color: rgba(var(--fondo-uno), 0.8) !important; // Changed opacity
+    border-radius: 10px; // Added border-radius
+  }
+
+  // Color del texto del input
+  .mat-mdc-input-element {
+    color: var(--fondo-dos) !important;
+    caret-color: var(--fondo-dos) !important;
+  }
+
+  // Color del label
+  .mat-mdc-floating-label {
+    color: var(--fondo-dos) !important;
+    font-weight: bold; // Added font-weight bold
+  }
+
+  // Línea inferior (underline)
+  .mdc-line-ripple::before,
+  .mdc-line-ripple::after {
+    border-bottom-color: var(--bordes) !important;
+  }
+
+  // Estados hover y focus para la línea
+  &:hover .mdc-line-ripple::before {
+    border-bottom-color: var(--bordes) !important;
+  }
+
+  &.mat-focused .mdc-line-ripple::after {
+    border-bottom-color: var(--bordes) !important;
+  }
+}
+
+// Para appearance="outline"
+.mat-mdc-form-field-appearance-outline {
+  .mat-mdc-text-field-wrapper {
+    background-color: rgba(var(--fondo-uno), 0.8) !important; // Changed opacity
+    border-radius: 10px; // Added border-radius
+  }
+
+  .mdc-notched-outline {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--bordes) !important;
+    }
+  }
+}
+
+// Botones del formulario
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  &.mat-primary {
+    --mdc-filled-button-container-color: var(--texto-botones);
+    --mdc-outlined-button-outline-color: var(--texto-botones);
+    --mdc-text-button-label-text-color: var(--texto-botones);
+  }
+}
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  background-color: var(--fondo-dos);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

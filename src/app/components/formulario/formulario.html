@@ -1,0 +1,83 @@
+<div class="form-container">
+  <h2>Formulario de pagos</h2>
+
+  <div *ngIf="mostrarMensajeValidacion() && form.invalid" class="validation-message">
+    Debes diligenciar los campos requeridos
+  </div>
+
+  <form #form="ngForm" (ngSubmit)="enviar()">
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('nombre'), 'field-valid': isControlValid('nombre')}">
+      <mat-label>Nombre</mat-label>
+      <input matInput [ngModel]="nombre()" (ngModelChange)="nombre.set($event)" name="nombre" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('apellido'), 'field-valid': isControlValid('apellido')}">
+      <mat-label>Apellido</mat-label>
+      <input matInput [ngModel]="apellido()" (ngModelChange)="apellido.set($event)" name="apellido" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('documento'), 'field-valid': isControlValid('documento')}">
+      <mat-label>Documento de Identidad</mat-label>
+      <input matInput [ngModel]="documento()" (ngModelChange)="documento.set($event)" name="documento" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('eps'), 'field-valid': isControlValid('eps')}">
+      <mat-label>EPS</mat-label>
+      <input matInput [ngModel]="eps()" (ngModelChange)="eps.set($event)" name="eps" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('acudienteUno'), 'field-valid': isControlValid('acudienteUno')}">
+      <mat-label>Acudiente Uno</mat-label>
+      <input matInput [ngModel]="acudienteUno()" (ngModelChange)="acudienteUno.set($event)" name="acudienteUno" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('telefonoAcudienteUno'), 'field-valid': isControlValid('telefonoAcudienteUno')}">
+      <mat-label>Teléfono Acudiente Uno</mat-label>
+      <input matInput [ngModel]="telefonoAcudienteUno()" (ngModelChange)="telefonoAcudienteUno.set($event)" name="telefonoAcudienteUno" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('acudienteDos'), 'field-valid': isControlValid('acudienteDos')}">
+      <mat-label>Acudiente Dos</mat-label>
+      <input matInput [ngModel]="acudienteDos()" (ngModelChange)="acudienteDos.set($event)" name="acudienteDos">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('telefonoAcudienteDos'), 'field-valid': isControlValid('telefonoAcudienteDos')}">
+      <mat-label>Teléfono Acudiente Dos</mat-label>
+      <input matInput [ngModel]="telefonoAcudienteDos()" (ngModelChange)="telefonoAcudienteDos.set($event)" name="telefonoAcudienteDos">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('plan'), 'field-valid': isControlValid('plan')}">
+      <mat-label>Plan</mat-label>
+      <mat-select [ngModel]="plan()" (ngModelChange)="plan.set($event)" name="plan" required>
+        <mat-option *ngFor="let opcion of opcionesPlan" [value]="opcion.plan">
+          {{opcion.plan}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('fechaInicial'), 'field-valid': isControlValid('fechaInicial')}">
+      <mat-label>Fecha Inicial</mat-label>
+      <input matInput [matDatepicker]="pickerInicial" [ngModel]="fechaInicial()" (ngModelChange)="fechaInicial.set($event)" name="fechaInicial" required>
+      <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicial></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('fechaFinal'), 'field-valid': isControlValid('fechaFinal')}">
+      <mat-label>Fecha Final</mat-label>
+      <input matInput [matDatepicker]="pickerFinal" [ngModel]="fechaFinal()" (ngModelChange)="fechaFinal.set($event)" name="fechaFinal" readonly required>
+      <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFinal></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('adicionales'), 'field-valid': isControlValid('adicionales')}">
+      <mat-label>Adicionales</mat-label>
+      <mat-select [ngModel]="adicionales()" (ngModelChange)="adicionales.set($event)" name="adicionales">
+        <mat-option *ngFor="let opcion of opcionesAdicionales" [value]="opcion.nombre">
+          {{opcion.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </form>
+</div>
