@@ -62,6 +62,10 @@
   &.mat-focused .mdc-line-ripple::after {
     border-bottom-color: var(--bordes) !important;
   }
+
+  // Override specific MDC input text color variable
+  --mdc-filled-text-field-input-text-color: var(--fondo-dos);
+  --mdc-outlined-text-field-input-text-color: var(--fondo-dos);
 }
 
 // Para appearance="outline"

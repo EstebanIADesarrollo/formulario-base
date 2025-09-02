@@ -78,6 +78,7 @@ export class Formulario {
   }));
 
   mostrarMensajeValidacion = signal(false); // New signal to control message visibility
+  triggerAnimation = signal(false); // New signal to control animation
 
   constructor() {
     effect(() => {
@@ -88,12 +89,23 @@ export class Formulario {
 
   enviar(): void {
     this.mostrarMensajeValidacion.set(true); // Show validation message on submit attempt
+    this.triggerAnimation.set(false); // Reset animation state
 
     if (this.form.valid) {
       console.log(this.formulario());
       this.mostrarMensajeValidacion.set(false); // Hide message if form is valid
     } else {
       console.log('Formulario inválido. Por favor, complete los campos requeridos.');
+      // Scroll to the top of the form if on a small screen
+      if (window.innerWidth < 600) { // Assuming 600px as breakpoint for mobile
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Trigger animation after a short delay to allow scroll to complete
+        setTimeout(() => {
+          this.triggerAnimation.set(true);
+        }, 500); // Adjust delay as needed for scroll duration
+      } else {
+        this.triggerAnimation.set(true); // Trigger animation immediately on larger screens
+      }
     }
   }
 

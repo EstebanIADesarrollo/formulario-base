@@ -1,7 +1,7 @@
 <div class="form-container">
   <h2>Formulario de pagos</h2>
 
-  <div *ngIf="mostrarMensajeValidacion() && form.invalid" class="validation-message">
+  <div *ngIf="mostrarMensajeValidacion() && form.invalid" class="validation-message" [class.animate-message]="triggerAnimation()">
     Debes diligenciar los campos requeridos
   </div>
 
@@ -18,7 +18,10 @@
 
     <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('documento'), 'field-valid': isControlValid('documento')}">
       <mat-label>Documento de Identidad</mat-label>
-      <input matInput [ngModel]="documento()" (ngModelChange)="documento.set($event)" name="documento" required>
+      <input matInput [ngModel]="documento()" (ngModelChange)="documento.set($event)" name="documento" required pattern="[0-9]{10}">
+      <mat-error *ngIf="form.controls['documento']?.errors?.['pattern']">
+        El campo debe tener 10 dígitos
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" [ngClass]="{'field-invalid': isControlInvalid('eps'), 'field-valid': isControlValid('eps')}">
