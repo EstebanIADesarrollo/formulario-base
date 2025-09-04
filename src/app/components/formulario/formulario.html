@@ -75,8 +75,8 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Fecha Final</mat-label>
-      <input matInput [matDatepicker]="pickerFinal" [ngModel]="fechaFinal()" (ngModelChange)="fechaFinal.set($event)" name="fechaFinal" readonly required>
-      <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="pickerFinal" [ngModel]="fechaFinal()" (ngModelChange)="fechaFinal.set($event)" name="fechaFinal" disabled required>
+      <mat-datepicker-toggle matSuffix [for]="pickerFinal" disabled></mat-datepicker-toggle>
       <mat-datepicker #pickerFinal></mat-datepicker>
     </mat-form-field>
 

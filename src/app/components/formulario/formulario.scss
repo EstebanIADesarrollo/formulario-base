@@ -69,6 +69,9 @@ button[mat-raised-button] {
 form.form-submitted {
   /* Target invalid fields within the submitted form */
   .mat-form-field.ng-invalid {
+    .mat-mdc-text-field-wrapper {
+      border: 2px solid var(--color-error);
+    }
     /* Force the outline/underline color to the error color */
     .mdc-notched-outline {
       .mdc-notched-outline__leading,
