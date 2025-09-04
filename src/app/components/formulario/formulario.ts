@@ -10,6 +10,7 @@ import { Planes } from '../../services/planes';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS, MatDateFormats } from '@angular/material/core';
 import moment from 'moment';
+import { FormularioDataService } from '../../services/formulario-data.service'; // Importa el nuevo servicio
 
 export const MY_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -60,6 +61,8 @@ export class Formulario {
   adicionales = signal('');
 
   private planesService = inject(Planes);
+  private formularioDataService = inject(FormularioDataService); // Inyecta el nuevo servicio
+
   opcionesPlan = this.planesService.planes;
   opcionesAdicionales = this.planesService.adicionales;
 
@@ -74,8 +77,8 @@ export class Formulario {
     acudienteDos: this.acudienteDos(),
     telefonoAcudienteDos: this.telefonoAcudienteDos(),
     plan: this.plan(),
-    fechaInicial: this.fechaInicial(),
-    fechaFinal: this.fechaFinal(),
+    fechaInicial: moment(this.fechaInicial()).format('YYYY-MM-DD'), // Formatear fecha
+    fechaFinal: moment(this.fechaFinal()).format('YYYY-MM-DD'), // Formatear fecha
     adicionales: this.adicionales()
   }));
 
@@ -96,9 +99,23 @@ export class Formulario {
     this.triggerAnimation.set(false); // Reset animation state
 
     if (this.form.valid) {
-      console.log(this.formulario());
+      console.log('Datos a enviar:', this.formulario());
       this.mostrarMensajeValidacion.set(false); // Hide message if form is valid
-      this.formSubmitted.set(false); // Reset submitted state on success
+
+      this.formularioDataService.enviarFormulario(this.formulario()).subscribe({
+        next: (response) => {
+          console.log('Respuesta del backend:', response);
+          alert('Formulario enviado con éxito!');
+          this.form.resetForm(); // Resetear el formulario después del envío exitoso
+          this.formSubmitted.set(false); // Reset submitted state on success
+        },
+        error: (error) => {
+          console.error('Error al enviar el formulario:', error);
+          alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+          this.formSubmitted.set(false); // Reset submitted state on error
+        }
+      });
+
     } else {
       this.mostrarMensajeValidacion.set(true); // Show validation message on submit attempt
       console.log('Formulario inválido. Por favor, complete los campos requeridos.');
@@ -119,3 +136,6 @@ export class Formulario {
   // isControlInvalid(controlName: string): boolean { ... }
   // isControlValid(controlName: string): boolean { ... }
 }
+
+
+
