@@ -6,80 +6,88 @@
 @use '@angular/material' as mat;
 
 :root {
-  --texto-botones: #219238;
-  --bordes: #F00302;
-  --fondo-uno: 38, 8, 28; // RGB values
-  --fondo-dos: #FEFFFF;
+  // Paleta de colores basada en JSON
+  --color-texto: #2e7d32;
+  --color-fondo-principal: #f5f5f5;
+  --color-fondo-campos: #ffffff;
+  --color-bordes-default: #d1d1d1;
+  --color-sombra: #e8e8e8;
+  --color-resalte: #4CAF50;
+  --color-error: #F00302; // Se mantiene el rojo para errores
 
   // Variables específicas para Angular Material
-  --mdc-filled-text-field-container-color: rgba(var(--fondo-uno), 0.8); // Changed opacity
-  --mdc-filled-text-field-label-text-color: var(--fondo-dos);
-  --mdc-filled-text-field-input-text-color: var(--fondo-dos);
-  --mdc-filled-text-field-active-indicator-color: var(--bordes);
-  --mdc-filled-text-field-hover-active-indicator-color: var(--bordes);
-  --mdc-filled-text-field-focus-active-indicator-color: var(--bordes);
+  --mdc-filled-text-field-container-color: var(--color-fondo-campos); // Changed to white
+  --mdc-filled-text-field-label-text-color: var(--color-texto); // Changed to green
+  --mdc-filled-text-field-input-text-color: var(--color-texto); // Changed to green
+  --mdc-filled-text-field-active-indicator-color: var(--color-error);
+  --mdc-filled-text-field-hover-active-indicator-color: var(--color-error);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--color-error);
 
   // Para outlined appearance (si lo usas)
-  --mdc-outlined-text-field-container-color: rgba(var(--fondo-uno), 0.8); // Changed opacity
-  --mdc-outlined-text-field-label-text-color: var(--fondo-dos);
-  --mdc-outlined-text-field-input-text-color: var(--fondo-dos);
-  --mdc-outlined-text-field-outline-color: var(--bordes);
-  --mdc-outlined-text-field-hover-outline-color: var(--bordes);
-  --mdc-outlined-text-field-focus-outline-color: var(--bordes);
+  --mdc-outlined-text-field-container-color: var(--color-fondo-campos); // Changed to white
+  --mdc-outlined-text-field-label-text-color: var(--color-texto); // Changed to green
+  --mdc-outlined-text-field-input-text-color: var(--color-texto); // Changed to green
+  --mdc-outlined-text-field-outline-color: var(--color-error);
+  --mdc-outlined-text-field-hover-outline-color: var(--color-error);
+  --mdc-outlined-text-field-focus-outline-color: var(--color-error);
 }
 
 // Estilos globales para mat-form-field
 .mat-mdc-form-field {
   // Background del campo
   .mat-mdc-text-field-wrapper {
-    background-color: rgba(var(--fondo-uno), 0.8) !important; // Changed opacity
+    background-color: var(--color-fondo-campos) !important; // Changed to white
     border-radius: 10px; // Added border-radius
+    box-shadow: 0 2px 5px var(--color-sombra);
   }
 
   // Color del texto del input
   .mat-mdc-input-element {
-    color: var(--fondo-dos) !important;
-    caret-color: var(--fondo-dos) !important;
+    color: var(--color-texto) !important;
+    caret-color: var(--color-texto) !important;
+    font-weight: bolder;
   }
 
   // Color del label
   .mat-mdc-floating-label {
-    color: var(--fondo-dos) !important;
+    color: var(--color-texto) !important;
     font-weight: bold; // Added font-weight bold
   }
 
   // Línea inferior (underline)
   .mdc-line-ripple::before,
   .mdc-line-ripple::after {
-    border-bottom-color: var(--bordes) !important;
+    border-bottom-color: var(--color-bordes-default) !important;
   }
 
   // Estados hover y focus para la línea
-  &:hover .mdc-line-ripple::before {
-    border-bottom-color: var(--bordes) !important;
-  }
-
-  &.mat-focused .mdc-line-ripple::after {
-    border-bottom-color: var(--bordes) !important;
-  }
+  // Estados hover y focus para la línea
+      &:hover .mdc-line-ripple::before {
+        border-bottom-color: var(--color-error) !important;
+      }
+    
+      &.mat-focused .mdc-line-ripple::after {
+        border-bottom-color: var(--color-error) !important;
+      }
 
   // Override specific MDC input text color variable
-  --mdc-filled-text-field-input-text-color: var(--fondo-dos);
-  --mdc-outlined-text-field-input-text-color: var(--fondo-dos);
+  --mdc-filled-text-field-input-text-color: var(--color-texto);
+  --mdc-outlined-text-field-input-text-color: var(--color-texto);
 }
 
 // Para appearance="outline"
 .mat-mdc-form-field-appearance-outline {
   .mat-mdc-text-field-wrapper {
-    background-color: rgba(var(--fondo-uno), 0.8) !important; // Changed opacity
+    background-color: var(--color-fondo-campos) !important; // Changed to white
     border-radius: 10px; // Added border-radius
+    box-shadow: 0 2px 5px var(--color-sombra);
   }
 
   .mdc-notched-outline {
     .mdc-notched-outline__leading,
     .mdc-notched-outline__notch,
     .mdc-notched-outline__trailing {
-      border-color: var(--bordes) !important;
+      border-color: var(--color-bordes-default) !important;
     }
   }
 }
@@ -89,9 +97,9 @@
 .mat-mdc-raised-button,
 .mat-mdc-unelevated-button {
   &.mat-primary {
-    --mdc-filled-button-container-color: var(--texto-botones);
-    --mdc-outlined-button-outline-color: var(--texto-botones);
-    --mdc-text-button-label-text-color: var(--texto-botones);
+    --mdc-filled-button-container-color: var(--color-resalte);
+    --mdc-outlined-button-outline-color: var(--color-resalte);
+    --mdc-text-button-label-text-color: var(--color-resalte);
   }
 }
 
@@ -110,7 +118,7 @@ body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  background-color: var(--fondo-dos);
+  background-color: var(--color-fondo-principal);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 

@@ -11,11 +11,11 @@ h2 {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 2rem;
-  color: var(--texto-botones); // Changed color to institutional green
+  color: var(--color-texto); // Changed color to institutional green
 }
 
 .validation-message {
-  color: var(--bordes); // Institutional red
+  color: var(--color-error); // Institutional red
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -41,10 +41,11 @@ form {
   max-width: 800px; // Increased max-width to accommodate two columns
   display: grid;
   grid-template-columns: 1fr; // Default to one column for mobile
-  gap: 10px; // Gap between fields
+  gap: 4px; // Reduced gap for mobile by 20%
 
   @media (min-width: 600px) { // For screens wider than 600px (tablets and desktops)
     grid-template-columns: 1fr 1fr; // Two columns
+    gap: 10px; // Keep original gap for desktop
   }
 }
 
@@ -57,14 +58,42 @@ mat-form-field {
 button[mat-raised-button] {
   font-size: 1.2rem;
   grid-column: 1 / -1; // Make button span all columns
-  color: var(--texto-botones); // Changed text color to institutional green
+  color: var(--color-resalte); // Changed text color to institutional green
 }
 
-// Styling for valid/invalid fields
-::ng-deep .mat-form-field.field-invalid .mat-form-field-outline {
-  border-color: var(--bordes) !important; // Institutional red
-}
+/* Styling for fields on a submitted form */
+form.form-submitted {
+  /* Target invalid fields within the submitted form */
+  .mat-form-field.ng-invalid {
+    /* Force the outline/underline color to the error color */
+    .mdc-notched-outline {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--color-error) !important;
+      }
+    }
+    .mdc-line-ripple::after {
+      border-bottom-color: var(--color-error) !important;
+    }
 
-::ng-deep .mat-form-field.field-valid .mat-form-field-outline {
-  border-color: var(--texto-botones) !important; // Institutional green
+    /* Make the label red as well */
+    .mat-mdc-floating-label {
+      color: var(--color-error) !important;
+    }
+  }
+
+  /* Optional: Style valid fields on a submitted form */
+  .mat-form-field.ng-valid {
+    .mdc-notched-outline {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--color-resalte) !important;
+      }
+    }
+    .mdc-line-ripple::after {
+      border-bottom-color: var(--color-resalte) !important;
+    }
+  }
 }

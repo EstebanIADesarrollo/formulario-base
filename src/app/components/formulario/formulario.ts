@@ -48,6 +48,7 @@ export class Formulario {
   nombre = signal('');
   apellido = signal('');
   documento = signal('');
+  correo = signal('');
   eps = signal('');
   acudienteUno = signal('');
   telefonoAcudienteUno = signal('');
@@ -66,6 +67,7 @@ export class Formulario {
     nombre: this.nombre(),
     apellido: this.apellido(),
     documento: this.documento(),
+    correo: this.correo(),
     eps: this.eps(),
     acudienteUno: this.acudienteUno(),
     telefonoAcudienteUno: this.telefonoAcudienteUno(),
@@ -87,14 +89,18 @@ export class Formulario {
     });
   }
 
+  formSubmitted = signal(false);
+
   enviar(): void {
-    this.mostrarMensajeValidacion.set(true); // Show validation message on submit attempt
+    this.formSubmitted.set(true);
     this.triggerAnimation.set(false); // Reset animation state
 
     if (this.form.valid) {
       console.log(this.formulario());
       this.mostrarMensajeValidacion.set(false); // Hide message if form is valid
+      this.formSubmitted.set(false); // Reset submitted state on success
     } else {
+      this.mostrarMensajeValidacion.set(true); // Show validation message on submit attempt
       console.log('Formulario inválido. Por favor, complete los campos requeridos.');
       // Scroll to the top of the form if on a small screen
       if (window.innerWidth < 600) { // Assuming 600px as breakpoint for mobile
@@ -109,20 +115,7 @@ export class Formulario {
     }
   }
 
-  // Helper to check control validity for styling
-  isControlInvalid(controlName: string): boolean {
-    if (!this.form || !this.form.controls[controlName]) { // Add check for form and control
-      return false;
-    }
-    const control = this.form.controls[controlName];
-    return this.mostrarMensajeValidacion() && control.invalid && (control.dirty || control.touched);
-  }
-
-  isControlValid(controlName: string): boolean {
-    if (!this.form || !this.form.controls[controlName]) { // Add check for form and control
-      return false;
-    }
-    const control = this.form.controls[controlName];
-    return this.mostrarMensajeValidacion() && control.valid && (control.dirty || control.touched);
-  }
+  // Helper methods are no longer needed with the new CSS approach
+  // isControlInvalid(controlName: string): boolean { ... }
+  // isControlValid(controlName: string): boolean { ... }
 }
