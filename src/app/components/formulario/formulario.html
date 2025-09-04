@@ -6,8 +6,8 @@
   </div>
 
   <form #form="ngForm" (ngSubmit)="enviar()" [class.form-submitted]="formSubmitted()">
-    <mat-form-field appearance="fill">
-      <mat-label>Documento de Identidad</mat-label>
+    <mat-form-field appearance="fill" class="full-width-desktop">
+      <mat-label>Documento de identidad del inscrito</mat-label>
       <input matInput [ngModel]="documento()" (ngModelChange)="documento.set($event)" name="documento" required pattern="[0-9]{10}">
       <mat-error *ngIf="form.controls['documento']?.errors?.['pattern']">
         El campo debe tener 10 dígitos

@@ -63,7 +63,7 @@
   // Estados hover y focus para la línea
   // Estados hover y focus para la línea
       &:hover .mdc-line-ripple::before {
-        border-bottom-color: var(--color-error) !important;
+        border-bottom-color: var(--color-texto) !important;
       }
     
       &.mat-focused .mdc-line-ripple::after {
