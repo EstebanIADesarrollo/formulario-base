@@ -3,7 +3,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  @media (max-width: 599px) {
+    padding: 20px 10px; // Reducido para móviles
+  }
+
+  img {
+    width: 100px;
+    margin-bottom: 20px;
+  }
 }
 
 h2 {
@@ -37,15 +49,16 @@ h2 {
 }
 
 form {
-  width: 80%;
-  max-width: 800px; // Increased max-width to accommodate two columns
+  width: 97%; // Ajustado para móviles
+  max-width: 800px;
   display: grid;
-  grid-template-columns: 1fr; // Default to one column for mobile
-  gap: 4px; // Reduced gap for mobile by 20%
+  grid-template-columns: 1fr;
+  gap: 4px;
 
-  @media (min-width: 600px) { // For screens wider than 600px (tablets and desktops)
-    grid-template-columns: 1fr 1fr; // Two columns
-    gap: 10px; // Keep original gap for desktop
+  @media (min-width: 600px) {
+    width: 80%; // Vuelve al 80% para escritorio
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 
     .full-width-desktop {
       grid-column: 1 / -1;
@@ -104,3 +117,4 @@ form.form-submitted {
     }
   }
 }
+

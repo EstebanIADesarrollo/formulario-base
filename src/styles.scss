@@ -8,7 +8,7 @@
 :root {
   // Paleta de colores basada en JSON
   --color-texto: #2e7d32;
-  --color-fondo-principal: #f5f5f5;
+  --color-fondo-principal: #f0f2f5;
   --color-fondo-campos: #ffffff;
   --color-bordes-default: #d1d1d1;
   --color-sombra: #e8e8e8;
@@ -118,7 +118,7 @@ body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  background-color: var(--color-fondo-principal);
+  background-color: var(--mat-sys-color-surface-container-lowest);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 

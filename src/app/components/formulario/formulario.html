@@ -1,4 +1,6 @@
 <div class="form-container">
+  
+  <img src="assets/logo-oncecaldasbogota-no-bg-1.png" alt="Logo Once Caldas Bogotá">
   <h2>Formulario de pagos</h2>
 
   <div *ngIf="mostrarMensajeValidacion() && form.invalid" class="validation-message" [class.animate-message]="triggerAnimation()">
@@ -44,7 +46,10 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Teléfono Acudiente Uno</mat-label>
-      <input matInput [ngModel]="telefonoAcudienteUno()" (ngModelChange)="telefonoAcudienteUno.set($event)" name="telefonoAcudienteUno" required>
+      <input matInput [ngModel]="telefonoAcudienteUno()" (ngModelChange)="telefonoAcudienteUno.set($event)" name="telefonoAcudienteUno" required pattern="[0-9]{1,10}" maxlength="10">
+      <mat-error *ngIf="form.controls['telefonoAcudienteUno']?.errors?.['pattern']">
+        Solo números, máximo 10 dígitos.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -54,7 +59,10 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Teléfono Acudiente Dos</mat-label>
-      <input matInput [ngModel]="telefonoAcudienteDos()" (ngModelChange)="telefonoAcudienteDos.set($event)" name="telefonoAcudienteDos">
+      <input matInput [ngModel]="telefonoAcudienteDos()" (ngModelChange)="telefonoAcudienteDos.set($event)" name="telefonoAcudienteDos" pattern="[0-9]{1,10}" maxlength="10">
+      <mat-error *ngIf="form.controls['telefonoAcudienteDos']?.errors?.['pattern']">
+        Solo números, máximo 10 dígitos.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

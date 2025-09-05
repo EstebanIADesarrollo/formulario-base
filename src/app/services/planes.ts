@@ -12,6 +12,7 @@ export class Planes {
   ];
 
   adicionales = [
+    { nombre: 'Ninguno', precio: 0 },
     { nombre: 'Uniforme', precio: 100000 },
     { nombre: 'Ruta', precio: 120000 },
     { nombre: 'Fisioterapia', precio: 300000 }

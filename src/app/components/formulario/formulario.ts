@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, effect, ViewChild } from '@angular/core';
+import { Component, signal, computed, inject, effect, ViewChild, HostListener } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms'; // Import NgForm
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -58,7 +58,7 @@ export class Formulario {
   plan = signal('');
   fechaInicial = signal(new Date());
   fechaFinal = signal(new Date());
-  adicionales = signal('');
+  adicionales = signal('Ninguno');
 
   private planesService = inject(Planes);
   private formularioDataService = inject(FormularioDataService); // Inyecta el nuevo servicio
@@ -135,6 +135,17 @@ export class Formulario {
   // Helper methods are no longer needed with the new CSS approach
   // isControlInvalid(controlName: string): boolean { ... }
   // isControlValid(controlName: string): boolean { ... }
+
+  /**
+   * Muestra un diálogo de confirmación antes de que el usuario abandone la página
+   * si el formulario tiene cambios sin guardar.
+   */
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    if (this.form.dirty) {
+      $event.returnValue = true;
+    }
+  }
 }
 
 
